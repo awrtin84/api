@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+
 app = FastAPI()
 
 class student(BaseModel):
     city : str
-    
+
 iran_provinces = {
     "آذربایجان شرقی": "تبریز",
     "آذربایجان غربی": "ارومیه",
@@ -45,12 +46,12 @@ iran_provinces = {
 def check_city(student):
     city = student.city
     if len(city) > 0 :
-        for n in city :
-            if ord(n) > 122 :
+        for i in city :
+            if ord(i) > 122 :
                 provinces_list = list(iran_provinces.values())
                 if city in provinces_list:
-                    return F"!استان شما با موفقیت ثبت گردید"
+                    return F"!شهر شما با موفقیت ثبت گردید"
                 else:
                     return F"!شهر شما باید مرکز یکی از استانها باشد"
-            return F"!نام استان باید فارسی باشد"
-    return F"!فیلد استان نباید خالی باشد"
+            return F"!نام شهر باید فارسی باشد"
+    return F"!فیلد شهر نباید خالی باشد"
